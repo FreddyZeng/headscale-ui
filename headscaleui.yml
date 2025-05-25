@@ -7,7 +7,7 @@ services:
       - ./container-config:/etc/headscale
       - ./container-data/data:/var/lib/headscale
     ports:
-       - 51189:8080
+       - 127.0.0.1:51189:8080
     command: ["./headscale", "serve"]
     restart: unless-stopped
   headscale-ui:
@@ -15,5 +15,5 @@ services:
     restart: unless-stopped
     container_name: headscale-ui
     ports:
-      - 52189:8443
-      - 53189:8080
+      - 127.0.0.1:52189:8443
+      - 127.0.0.1:53189:8080
