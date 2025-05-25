@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  headscale:
+    image: headscale-build:latest
+    container_name: headscale
+    volumes:
+      - ./container-config:/etc/headscale
+      - ./container-data/data:/var/lib/headscale
+    ports:
+       - 51189:8080
+    command: ["./headscale", "serve"]
+    restart: unless-stopped
+  headscale-ui:
+    image: headscale-ui-build:latest
+    restart: unless-stopped
+    container_name: headscale-ui
+    ports:
+      - 52189:8443
+      - 53189:8080
