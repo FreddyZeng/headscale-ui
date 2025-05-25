@@ -1,14 +1,14 @@
 FROM node:lts AS build
 
 # arguments
-ARG VERSION="master"
+ARG VERSION="current2025-05-22"
 # Branch to check out
-ARG CHECKOUT_BRANCH="master"
+ARG CHECKOUT_BRANCH="current"
 
 #environment variables
 ENV PROJECT_NAME="headscale-ui"
 # URL for the github/git location
-ENV PROJECT_URL="https://github.com/gurucomputing/headscale-ui"
+ENV PROJECT_URL="https://github.com/FreddyZeng/headscale-ui"
 
 # Set the staging environment
 WORKDIR /staging/scripts
@@ -16,7 +16,7 @@ WORKDIR /staging
 RUN chown 1000:1000 /staging
 
 # Copy across the scripts folder
-COPY scripts/* ./scripts/
+COPY docker/production/scripts/* ./scripts/
 
 # Set permissions for all scripts. We do not want normal users to have write
 # access to the scripts
@@ -35,7 +35,7 @@ FROM alpine:latest
 #environment variables
 ENV PROJECT_NAME="headscale-ui"
 # URL for the github/git location
-ENV PROJECT_URL="https://github.com/gurucomputing/headscale-ui"
+ENV PROJECT_URL="https://github.com/FreddyZeng/headscale-ui"
 # Ports that caddy will run on
 ENV HTTP_PORT="8080"
 ENV HTTPS_PORT="8443"
@@ -50,7 +50,7 @@ WORKDIR /staging/scripts
 WORKDIR /staging
 
 # Copy across the scripts folder
-COPY scripts/* ./scripts/
+COPY docker/production/scripts/* ./scripts/
 # Copy default caddy config from project root
 COPY ./Caddyfile /staging/Caddyfile
 COPY --from=build /staging/${PROJECT_NAME}/build /web
