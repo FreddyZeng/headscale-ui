@@ -2,6 +2,6 @@
 	redir / /web
 	uri strip_prefix /web
 	file_server {
-		root ./build
+		root ./web
 	}
 }
